@@ -28,3 +28,11 @@ def evaluer(selection, actions):
     cout = sum(actions[i]["cout"] for i in ids)
     gain = sum(actions[i]["gain"] for i in ids)
     return cout, gain
+
+def enumerer(actions, budget):
+    ids = list(actions)
+    for bits in product([0, 1], repeat=len(ids)):
+        selection = [i for i, b in zip(ids, bits) if b]
+        res = evaluer(selection, actions)
+        if res is not None and res[0] <= budget:
+            yield selection, res[0], res[1]
