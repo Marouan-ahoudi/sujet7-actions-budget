@@ -39,3 +39,21 @@ def enumerer(actions, budget):
 
 def meilleur_portefeuille(actions, budget):
     return max(enumerer(actions, budget), key=lambda s: (s[2], -s[1]))
+
+import matplotlib.pyplot as plt
+
+def courbe_sensibilite(actions, budget_max=20):
+    budgets = list(range(budget_max + 1))
+    gains = [meilleur_portefeuille(actions, b)[2] for b in budgets]
+    return budgets, gains
+
+
+def tracer(budgets, gains, fichier="budget_sensibilite.png"):
+    plt.step(budgets, gains, where="post", marker="o")
+    plt.xlabel("Budget")
+    plt.ylabel("Meilleur bénéfice")
+    plt.title("Budget disponible et bénéfice maximal")
+    plt.grid(alpha=0.3)
+    plt.savefig(fichier, dpi=150)
+    plt.close()
+    
