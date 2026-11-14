@@ -56,4 +56,26 @@ def tracer(budgets, gains, fichier="budget_sensibilite.png"):
     plt.grid(alpha=0.3)
     plt.savefig(fichier, dpi=150)
     plt.close()
-    
+
+def tests():
+    actions = charger_actions("actions.csv")
+    verifier_prerequis_existent(actions)
+
+    sel, cout, gain = meilleur_portefeuille(actions, 10)
+    assert set(sel) == {"C", "D", "F"} and cout == 9 and gain == 15
+
+    assert meilleur_portefeuille(actions, 0)[0] == []
+
+    for s, _, _ in enumerer(actions, 20):
+        assert "D" not in s or "C" in s
+
+    _, gains = courbe_sensibilite(actions)
+    assert all(a <= b for a, b in zip(gains, gains[1:]))
+
+    try:
+        verifier_prerequis_existent({"X": {"cout": 1, "gain": 1, "prerequis": {"Z"}}})
+        assert False, "ValueError attendue"
+    except ValueError:
+        pass
+
+    print("Toutes les vérifications passent")
