@@ -19,3 +19,12 @@ def verifier_prerequis_existent(actions):
         inconnus = a["prerequis"] - set(actions)
         if inconnus:
             raise ValueError(f"Prérequis inconnu pour {id_} : {inconnus}")
+
+def evaluer(selection, actions):
+    ids = set(selection)
+    for i in ids:
+        if not actions[i]["prerequis"] <= ids:
+            return None
+    cout = sum(actions[i]["cout"] for i in ids)
+    gain = sum(actions[i]["gain"] for i in ids)
+    return cout, gain
