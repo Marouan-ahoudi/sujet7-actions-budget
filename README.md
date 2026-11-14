@@ -1,16 +1,9 @@
 # Sujet 7 - Sélection d'actions sous budget
 
 ## Objectif
-(1-2 phrases : ce que le programme calcule)
-
-## Lancer le projet
-    pip install matplotlib
-    python selection.py
-
-## Décisions
-- Pourquoi `itertools.product` (toutes les sélections 0/1)
-- Pourquoi un `set` pour les prérequis
-- Pourquoi la clé (gain, -coût) pour départager
+Sélectionner un ensemble d’actions respectant
+budget et prérequis tout en maximisant la somme des
+bénéfices.
 
 ## Contraintes respectées
 - Budget, prérequis, bénéfices positifs ou nuls
