@@ -79,3 +79,18 @@ def tests():
         pass
 
     print("Toutes les vérifications passent")
+
+
+
+#programme principale :
+
+if __name__ == "__main__":
+    actions = charger_actions("actions.csv")
+    verifier_prerequis_existent(actions)
+
+    sel, cout, gain = meilleur_portefeuille(actions, 10)
+    print(f"Budget 10 -> {sel}, coût {cout}, bénéfice {gain}")
+
+    budgets, gains = courbe_sensibilite(actions)
+    tracer(budgets, gains)
+    tests()    
