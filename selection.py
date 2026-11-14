@@ -36,3 +36,6 @@ def enumerer(actions, budget):
         res = evaluer(selection, actions)
         if res is not None and res[0] <= budget:
             yield selection, res[0], res[1]
+
+def meilleur_portefeuille(actions, budget):
+    return max(enumerer(actions, budget), key=lambda s: (s[2], -s[1]))
