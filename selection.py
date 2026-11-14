@@ -13,3 +13,9 @@ def charger_actions(chemin):
                 "prerequis": prerequis,
             }
     return actions
+
+def verifier_prerequis_existent(actions):
+    for id_, a in actions.items():
+        inconnus = a["prerequis"] - set(actions)
+        if inconnus:
+            raise ValueError(f"Prérequis inconnu pour {id_} : {inconnus}")
